@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="es"><head><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-okaidia.min.css" rel="stylesheet"/><title>DOM | jonmircha</title><meta name="description" content="En esta nota te comparto algunos conceptos importantes sobre el DOM de JavaScript"/><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#fb6d43"/><meta name="MobileOptimized" content="width"/><meta name="HandheldFriendly" content="true"/><meta name="twitter:site" content="@jonmircha"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="DOM | jonmircha"/><meta name="twitter:description" content="En esta nota te comparto algunos conceptos importantes sobre el DOM de JavaScript"/><meta name="twitter:image" content="https://jonmircha.com/img/blog/dom.png"/><meta property="og:site_name" content="jonmircha"/><meta property="og:url" content="https://jonmircha.com/dom"/><meta property="og:type" content="website"/><meta property="og:title" content="DOM | jonmircha"/><meta property="og:description" content="En esta nota te comparto algunos conceptos importantes sobre el DOM de JavaScript"/><meta property="og:image" content="https://jonmircha.com/img/blog/dom.png"/><meta itemProp="name" content="DOM | jonmircha"/><meta itemProp="description" content="En esta nota te comparto algunos conceptos importantes sobre el DOM de JavaScript"/><meta itemProp="image" content="https://jonmircha.com/img/blog/dom.png"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><meta name="format-detection" content="telephone=no"/><meta name="apple-mobile-web-app-title" content="jonmircha"/><meta name="msapplication-TileColor" content="#fb6d43"/><meta name="msapplication-TileImage" content="/img/favicon.png"/><link rel="apple-touch-icon" href="/img/favicon.png"/><link rel="apple-touch-startup-image" href="/img/favicon.png"/><link rel="shortcut icon" type="image/png" href="/img/favicon.png"/><link rel="author" type="text/plain" href="https://jonmircha.com/humans.txt"/><link rel="sitemap" type="application/xml" title="Sitemap" href="https://jonmircha.com/sitemap.xml"/><link rel="manifest" href="/manifest.json"/><link rel="canonical" href="https://jonmircha.com/dom"/><meta name="next-head-count" content="34"/><link rel="preload" href="/_next/static/css/66913a9e0d2f16a3aa00.css" as="style"/><link rel="stylesheet" href="/_next/static/css/66913a9e0d2f16a3aa00.css"/><link rel="preload" href="/_next/static/1rQpbZWL5yLOmptAMkOoS/pages/post.js" as="script"/><link rel="preload" href="/_next/static/1rQpbZWL5yLOmptAMkOoS/pages/_app.js" as="script"/><link rel="preload" href="/_next/static/runtime/webpack-b65cab0b00afd201cbda.js" as="script"/><link rel="preload" href="/_next/static/chunks/framework.98c1b221acb34aa9927b.js" as="script"/><link rel="preload" href="/_next/static/chunks/commons.3c217cbb8a5193935007.js" as="script"/><link rel="preload" href="/_next/static/runtime/main-8f4204d4e82e433d8255.js" as="script"/><link rel="preload" href="/_next/static/chunks/7c6cbea9084bdf181f0ad50c9ef43df628d3f365.b08e20f3d97de96a6967.js" as="script"/><style id="__jsx-743697922">.header.jsx-743697922{width:100%;text-align:center;background-color:var(--white);border-bottom:thin solid var(--gray-light);}.header.jsx-743697922 a.jsx-743697922{color:var(--dark);-webkit-text-decoration:none;text-decoration:none;font-weight:900;}.header.jsx-743697922 a.jsx-743697922:hover{box-shadow:none;}.header.jsx-743697922 h2.jsx-743697922{font-size:var(--fluid-1);}.header.jsx-743697922 h2.jsx-743697922>a.jsx-743697922{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}.header.jsx-743697922 nav.jsx-743697922{padding:calc(var(--fluid-0) / 1.5);}.menu.jsx-743697922 a.jsx-743697922:hover{box-shadow:inset 0 -2px 0 var(--orange);}.social-media.jsx-743697922 path.jsx-743697922{fill:var(--orange);}@media screen and (min-width:780px){.header.jsx-743697922>div.jsx-743697922{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}.header.jsx-743697922 h2.jsx-743697922{padding-left:var(--fluid-0);margin-right:auto;width:auto;-webkit-flex-basis:auto;-ms-flex-preferred-size:auto;flex-basis:auto;}.menu.jsx-743697922{width:36%;-webkit-flex-basis:36%;-ms-flex-preferred-size:36%;flex-basis:36%;}.social-media.jsx-743697922{width:42%;-webkit-flex-basis:42%;-ms-flex-preferred-size:42%;flex-basis:42%;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}}@media screen and (min-width:992px){.header.jsx-743697922{position:-webkit-sticky;position:sticky;top:0;z-index:999;margin-top:var(--fluid-1);}.header.jsx-743697922>div.jsx-743697922{margin-left:auto;margin-right:auto;width:992px;}.social-media.jsx-743697922{-webkit-box-pack:space-evenly;-webkit-justify-content:space-evenly;-ms-flex-pack:space-evenly;justify-content:space-evenly;}}@media screen and (min-width:1024px){.header.jsx-743697922 h2.jsx-743697922{padding-left:0;}.social-media.jsx-743697922{-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}}</style><style id="__jsx-3439268700">.sponsors.jsx-3439268700{background-image:url("/img/posters/apoyo.jpg");background-repeat:no-repeat;background-position:center top;background-size:cover;background-attachment:fixed;}.sponsors.jsx-3439268700>div.jsx-3439268700{width:inherit;min-height:inherit;background-color:rgba(0,0,0,0.8);color:var(--white);}.sponsor.jsx-3439268700{border:thin solid var(--gray-light);border-radius:calc(var(--fluid-0) / 4);margin:var(--fluid-0);max-width:250px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;text-align:center;-webkit-text-decoration:none;text-decoration:none;background-color:var(--gray-light);color:var(--white);}.sponsor.jsx-3439268700 h3.jsx-3439268700{font-size:calc(var(--fluid-4) / 2);}.sponsor.jsx-3439268700 img.jsx-3439268700{border-radius:25%;padding:var(--fluid-2);margin:var(--fluid-0);width:calc(var(--fluid-4) * 2);height:calc(var(--fluid-4) * 2);background-color:var(--white);}</style><style id="__jsx-2851879921">.post h1{font-size:calc(var(--fluid-5) * 0.825);text-align:center;}.post hr{border:thin solid var(--gray-light);}.post img{margin-left:auto;margin-right:auto;display:block;}.post p,.post li{font-size:calc(var(--fluid-1) * 0.85);line-height:1.4;}.post .btn-pulse{margin-left:auto;margin-bottom:var(--fluid-5);padding:calc(var(--fluid-0) / 3);display:block;width:35%;font-size:calc(var(--fluid-1) / 1.25);background-color:var(--blue);box-shadow:0 0 4px var(--blue);}.post .date{margin-top:calc(var(--fluid-1) * -1);display:block;font-size:calc(var(--fluid-1) * 0.5);text-align:center;}@media screen and (min-width:992px){.post h1{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;font-size:calc(var(--fluid-5) * 1);}}</style></head><body><div id="__next"><header class="jsx-743697922 header"><div class="jsx-743697922"><h2 class="jsx-743697922"><a class="jsx-743697922 pulse" href="/"><img src="/img/kEnAi.svg" alt="kEnAi" class="jsx-743697922 icon-x2"/><span class="jsx-743697922">jonmircha</span></a></h2><nav class="jsx-743697922 flex-row-evenly-center fluid-0 menu"><a class="jsx-743697922" href="/cursos/">Cursos</a><a class="jsx-743697922" href="/blog/">Blog</a><a class="jsx-743697922" href="/ahora/">Ahora</a></nav><nav class="jsx-743697922 flex-row-evenly-center fluid-0 social-media"><a href="https://youtube.com/jonmircha?sub_confirmation=1" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="jsx-743697922 icon"><title class="jsx-743697922">Suscríbete a mi canal de YouTube</title><path fill="#F00" d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" class="jsx-743697922"></path></svg></a><a href="https://twitter.com/jonmircha" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Sígueme en Twitter</title><path fill="#1DA1F2" d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z" class="jsx-743697922"></path></svg></a><a href="https://instagram.com/jonmircha" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Sígueme en Instagram</title><path fill="#E4405F" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" class="jsx-743697922"></path></svg></a><a href="https://tinyletter.com/jonmircha" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Suscríbete a mi lista de correo</title><path fill="#010101" d="M5.564 2.703l3.45 3.734-2.434 4.798 5.14-.921 2.34 5.646L24 2.926 5.564 2.703zm-.636 8.088l.957-.787-1.234.39-.126-.18.51-.495-.669.27C1.813 10.979 0 13.455 0 16.35c0 1.951.822 3.705 2.133 4.947-.563-.99-.885-2.134-.885-3.355 0-2.865 1.809-5.415 4.315-6.42l.315-.766-.75.331-.211-.285.011-.011zm4.364-1.97L10.89 6l9.398-2.201L9.292 8.821z" class="jsx-743697922"></path></svg></a><a href="https://jonmircha.com/jonmircha-cv.pdf" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Descarga mi CV</title><path fill="#18A303" d="M16.365 0a.597.597 0 00-.555.352.582.582 0 00.128.635l4.985 4.996a.605.605 0 00.635.133.59.59 0 00.363-.53V.577A.605.605 0 0021.335 0zM2.661 0a.59.59 0 00-.582.59v22.82a.59.59 0 00.582.59h18.67a.59.59 0 00.59-.59V8.716a.59.59 0 00-.17-.42L13.674.182a.59.59 0 00-.42-.181zm.59 1.184h9.754l7.733 7.77v13.863H3.251z" class="jsx-743697922"></path></svg></a><a href="https://www.paypal.me/jonmircha" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Invítame un Taco en PayPal</title><path fill="#00457C" d="M6.908 24H3.804c-.664 0-1.086-.529-.936-1.18l.149-.674h2.071c.666 0 1.336-.533 1.482-1.182l1.064-4.592c.15-.648.816-1.18 1.48-1.18h.883c3.789 0 6.734-.779 8.84-2.34s3.16-3.6 3.16-6.135c0-1.125-.195-2.055-.588-2.789 0-.016-.016-.031-.016-.046l.135.075c.75.465 1.32 1.064 1.711 1.814.404.75.598 1.68.598 2.791 0 2.535-1.049 4.574-3.164 6.135-2.1 1.545-5.055 2.324-8.834 2.324h-.9c-.66 0-1.334.525-1.484 1.186L8.39 22.812c-.149.645-.81 1.17-1.47 1.17L6.908 24zm-2.677-2.695H1.126c-.663 0-1.084-.529-.936-1.18L4.563 1.182C4.714.529 5.378 0 6.044 0h6.465c1.395 0 2.609.098 3.648.289 1.035.189 1.92.519 2.684.99.736.465 1.322 1.072 1.697 1.818.389.748.584 1.68.584 2.797 0 2.535-1.051 4.574-3.164 6.119-2.1 1.561-5.056 2.326-8.836 2.326h-.883c-.66 0-1.328.524-1.478 1.169L5.7 20.097c-.149.646-.817 1.172-1.485 1.172l.016.036zm7.446-17.369h-1.014c-.666 0-1.332.529-1.48 1.178l-.93 4.02c-.15.648.27 1.179.93 1.179h.766c1.664 0 2.97-.343 3.9-1.021.929-.686 1.395-1.654 1.395-2.912 0-.83-.301-1.445-.9-1.84-.6-.404-1.5-.605-2.686-.605l.019.001z" class="jsx-743697922"></path></svg></a><a href="https://www.patreon.com/jonmircha" target="_blank" rel="noopener" class="jsx-743697922"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="jsx-743697922 icon"><title class="jsx-743697922">Apóyame en Patreon</title><path fill="#F96854" d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003" class="jsx-743697922"></path></svg></a></nav></div></header><main><div class="fluid-wrap fluid-insulate-bottom post"><h1 id="_dom_"><em>DOM</em></h1>
+<p><small class="date">Última actualización: <em>May 27 2020</em></small></p>
+<p><img class="icon-x5" src="/img/category/javascript.svg" alt="Categoría: javascript" title="Categoría: javascript" loading="lazy"></p>
+<h2 id="_domdocumentobjectmodel_"><em>DOM: Document Object Model</em></h2>
+<p>El Modelo de Objetos del Documento es un <em>API</em> para documentos <em>HTML</em> y <em>XML</em>.</p>
+<p>Éste proveé una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código <em>JavaScript</em>.</p>
+<p><strong>El <em>DOM</em> no es parte de la especificación de <em>JavaScript</em>, es una <em>API</em> para los navegadores.</strong></p>
+<p><a href="https://developer.mozilla.org/es/docs/DOM" target="_blank" rel="noopener">Más información en <em>MDN</em></a>.</p>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=VlMiHqTR-7s&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="elementosdeldocumento">Elementos del Documento:</h3>
+<pre><code class="js language-js">console.log(window.document);
+console.log(document);
+console.log(document.head);
+console.log(document.body);
+console.log(document.documentElement);
+console.log(document.doctype);
+console.log(document.charset);
+console.log(document.title);
+console.log(document.links);
+console.log(document.images);
+console.log(document.forms);
+console.log(document.styleSheets);
+console.log(document.scripts);
+setTimeout(() =&gt; {
+  console.log(document.getSelection().toString());
+}, 2000);
+document.write("&lt;h2&gt;Hola Mundo desde el DOM&lt;/h2&gt;");
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=dF7lp_qBfV0&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="nodoselementosyselectores">Nodos, Elementos y Selectores:</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType" target="_blank" rel="noopener">Más información en <em>MDN</em></a>.</p>
+<pre><code class="js language-js">console.log(document.getElementsByTagName("li"));
+console.log(document.getElementsByClassName("card"));
+console.log(document.getElementsByName("nombre"));
+console.log(document.getElementById("menu"));
+console.log(document.querySelector("#menu"));
+console.log(document.querySelector("a"));
+console.log(document.querySelectorAll("a"));
+console.log(document.querySelectorAll("a").length);
+document.querySelectorAll("a").forEach((el) =&gt; console.log(el));
+console.log(document.querySelector(".card"));
+console.log(document.querySelectorAll(".card"));
+console.log(document.querySelectorAll(".card")[2]);
+console.log(document.querySelector("#menu li"));
+console.log(document.querySelectorAll("#menu li"));
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=zBmtmlB5b5g&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="atributosy_dataattributes_">Atributos y <em>Data-Attributes</em>:</h3>
+<pre><code class="js language-js">console.log(document.documentElement.lang);
+console.log(document.documentElement.getAttribute("lang"));
+console.log(document.querySelector(".link-dom").href);
+console.log(document.querySelector(".link-dom").getAttribute("href"));
+
+document.documentElement.lang = "en";
+console.log(document.documentElement.lang);
+document.documentElement.setAttribute("lang", "es-MX");
+console.log(document.documentElement.lang);
+
+const $linkDOM = document.querySelector(".link-dom");
+
+$linkDOM.setAttribute("target", "_blank");
+$linkDOM.setAttribute("rel", "noopener");
+$linkDOM.setAttribute("href", "https://youtube.com/jonmircha");
+console.log($linkDOM.hasAttribute("rel"));
+$linkDOM.removeAttribute("rel");
+console.log($linkDOM.hasAttribute("rel"));
+
+//Data-Attributes
+console.log($linkDOM.getAttribute("data-description"));
+console.log($linkDOM.dataset);
+console.log($linkDOM.dataset.description);
+$linkDOM.setAttribute("data-description", "Modelo de Objeto del Documento");
+console.log($linkDOM.dataset.description);
+$linkDOM.dataset.description = "Suscríbete a mi canal y comparte";
+console.log($linkDOM.dataset.description);
+console.log($linkDOM.hasAttribute("data-id"));
+$linkDOM.removeAttribute("data-id");
+console.log($linkDOM.hasAttribute("data-id"));
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=l6npGZa_vgc&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="estilosyvariables_css_">Estilos y Variables <em>CSS</em>:</h3>
+<pre><code class="js language-js">const $linkDOM = document.querySelector(".link-dom");
+
+console.log($linkDOM.style);
+console.log($linkDOM.getAttribute("style"));
+console.log($linkDOM.style.backgroundColor);
+console.log($linkDOM.style.color);
+console.log(window.getComputedStyle($linkDOM));
+console.log(getComputedStyle($linkDOM).getPropertyValue("color"));
+
+$linkDOM.style.setProperty("text-decoration", "none");
+$linkDOM.style.setProperty("display", "block");
+$linkDOM.style.width = "50%";
+$linkDOM.style.textAlign = "center";
+$linkDOM.style.marginLeft = "auto";
+$linkDOM.style.marginRight = "auto";
+$linkDOM.style.padding = "1rem";
+$linkDOM.style.borderRadius = ".5rem";
+
+console.log($linkDOM.style);
+console.log($linkDOM.getAttribute("style"));
+console.log(getComputedStyle($linkDOM));
+
+//Variables CSS - Custom Properties CSS
+const $html = document.documentElement,
+  $body = document.body;
+
+let varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color"),
+  varYellowColor = getComputedStyle($html).getPropertyValue("--yellow-color");
+
+console.log(varDarkColor, varYellowColor);
+
+$body.style.backgroundColor = varDarkColor;
+$body.style.color = varYellowColor;
+
+$html.style.setProperty("--dark-color", "#000");
+varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
+
+$body.style.setProperty("background-color", varDarkColor);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=asR6_XGzI3s&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="clases_css_">Clases <em>CSS</em>:</h3>
+<pre><code class="js language-js">const $card = document.querySelector(".card");
+
+console.log($card);
+console.log($card.className);
+console.log($card.classList);
+console.log($card.classList.contains("rotate-45"));
+$card.classList.add("rotate-45");
+console.log($card.classList.contains("rotate-45"));
+console.log($card.className);
+console.log($card.classList);
+$card.classList.remove("rotate-45");
+console.log($card.classList.contains("rotate-45"));
+$card.classList.toggle("rotate-45");
+console.log($card.classList.contains("rotate-45"));
+$card.classList.toggle("rotate-45");
+console.log($card.classList.contains("rotate-45"));
+$card.classList.toggle("rotate-45");
+$card.classList.replace("rotate-45", "rotate-135");
+$card.classList.add("opacity-80", "sepia");
+$card.classList.remove("opacity-80", "sepia");
+$card.classList.toggle("opacity-80", "sepia");
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=x1bzRMEH89A&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="textoy_html_">Texto y <em>HTML</em>:</h3>
+<pre><code class="js language-js">const $whatIsDOM = document.getElementById("que-es");
+let text = `
+    &lt;p&gt;
+      El Modelo de Objetos del Documento (&lt;b&gt;&lt;i&gt;DOM - Document Object Model&lt;/i&gt;&lt;/b&gt;) es un API para documentos HTML y XML.
+    &lt;/p&gt;
+    &lt;p&gt;
+      Éste proveé una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS.
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;mark&gt;El DOM no es parte de la especificación de JavaScript, es una API para los navegadores.&lt;/mark&gt;
+    &lt;/p&gt;
+  `;
+
+//$whatIsDOM.innerText = text;
+$whatIsDOM.textContent = text;
+$whatIsDOM.innerHTML = text;
+$whatIsDOM.outerHTML = text;
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=ezjxA4o2-Ck&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="_domtraversing_recorriendoel_dom_"><em>DOM Traversing</em>: Recorriendo el <em>DOM</em>:</h3>
+<pre><code class="js language-js">const $cards = document.querySelector(".cards");
+
+console.log($cards);
+console.log($cards.children);
+console.log($cards.children[2]);
+console.log($cards.parentElement);
+console.log($cards.firstElementChild);
+console.log($cards.lastElementChild);
+console.log($cards.previousElementSibling);
+console.log($cards.nextElementSibling);
+console.log($cards.closest("div"));
+console.log($cards.closest("body"));
+console.log($cards.children[3].closest("section"));
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=m50UZkgV9-Q&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="creandoelementosyfragmentos">Creando Elementos y Fragmentos:</h3>
+<pre><code class="js language-js">const $figure = document.createElement("figure"),
+  $img = document.createElement("img"),
+  $figcaption = document.createElement("figcaption"),
+  $figcaptionText = document.createTextNode("Animals"),
+  $cards = document.querySelector(".cards"),
+  $figure2 = document.createElement("figure");
+
+$img.setAttribute("src", "https://placeimg.com/200/200/animals");
+$img.setAttribute("alt", "Animals");
+$figure.classList.add("card");
+
+$figcaption.appendChild($figcaptionText);
+$figure.appendChild($img);
+$figure.appendChild($figcaption);
+$cards.appendChild($figure);
+
+$figure2.innerHTML = `
+&lt;img src="https://placeimg.com/200/200/people" alt="People"&gt;
+&lt;figcaption&gt;People&lt;/figcaption&gt;
+`;
+$figure2.classList.add("card");
+
+$cards.appendChild($figure2);
+
+const estaciones = ["Primavera", "Verano", "Otoño", "Invierno"],
+  $ul = document.createElement("ul");
+
+document.write("&lt;h3&gt;Estaciones del Año&lt;/h3&gt;");
+document.body.appendChild($ul);
+
+estaciones.forEach((el) =&gt; {
+  const $li = document.createElement("li");
+  $li.textContent = el;
+  $ul.appendChild($li);
+});
+
+const continentes = ["África", "América", "Asia", "Europa", "Oceanía"],
+  $ul2 = document.createElement("ul");
+
+document.write("&lt;h3&gt;Continentes del Mundo&lt;/h3&gt;");
+document.body.appendChild($ul2);
+$ul2.innerHTML = "";
+continentes.forEach((el) =&gt; ($ul2.innerHTML += `&lt;li&gt;${el}&lt;/li&gt;`));
+
+const meses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+  $ul3 = document.createElement("ul"),
+  $fragment = document.createDocumentFragment();
+
+meses.forEach((el) =&gt; {
+  const $li = document.createElement("li");
+  $li.textContent = el;
+  $fragment.appendChild($li);
+});
+
+document.write("&lt;h3&gt;Meses del Año&lt;/h3&gt;");
+$ul3.appendChild($fragment);
+document.body.appendChild($ul3);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=tFSFX37Yah4&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="_templateshtml_"><em>Templates HTML</em>:</h3>
+<pre><code class="html language-html">&lt;template id="template-card"&gt;
+  &lt;figure class="card"&gt;
+    &lt;img /&gt;
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/template&gt;
+</code></pre>
+<pre><code class="js language-js">const $cards = document.querySelector(".cards"),
+  $template = document.getElementById("template-card").content,
+  $fragment = document.createDocumentFragment(),
+  cardsContent = [
+    {
+      title: "Tecnología",
+      img: "https://placeimg.com/200/200/tech",
+    },
+    {
+      title: "Animales",
+      img: "https://placeimg.com/200/200/animals",
+    },
+    {
+      title: "Arquitectura",
+      img: "https://placeimg.com/200/200/arch",
+    },
+    {
+      title: "Gente",
+      img: "https://placeimg.com/200/200/people",
+    },
+    {
+      title: "Naturaleza",
+      img: "https://placeimg.com/200/200/nature",
+    },
+  ];
+
+cardsContent.forEach((el) =&gt; {
+  $template.querySelector("img").setAttribute("src", el.img);
+  $template.querySelector("img").setAttribute("alt", el.title);
+  $template.querySelector("figcaption").textContent = el.title;
+
+  let $clone = document.importNode($template, true);
+  $fragment.appendChild($clone);
+});
+
+$cards.appendChild($fragment);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=Q9y9BugN8-s&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="modificandoelementos_oldstyle_">Modificando Elementos (<em>Old Style</em>):</h3>
+<pre><code class="js language-js">const $cards = document.querySelector(".cards"),
+  $newCard = document.createElement("figure"),
+  $cloneCards = $cards.cloneNode(true);
+
+$newCard.innerHTML = `
+  &lt;img src="https://placeimg.com/200/200/any" alt="Any"&gt;
+  &lt;figcaption&gt;Any&lt;/figcaption&gt;
+`;
+$newCard.classList.add("card");
+
+//$cards.replaceChild($newCard, $cards.children[2]);
+//$cards.removeChild($cards.lastElementChild);
+$cards.insertBefore($newCard, $cards.firstElementChild);
+document.body.appendChild($cloneCards);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=epMoFp_2ay8&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="modificandoelementos_coolstyle_">Modificando Elementos (<em>Cool Style</em>):</h3>
+<pre><code class="js language-js">/*
+.insertAdjacent...
+  .insertAdjacentElement(position, el)
+  .insertAdjacentHTML(position, html)
+  .insertAdjacentText(position, text)
+
+Posiciones:
+  beforebegin(hermano anterior)
+  afterbegin(primer hijo)
+  beforeend(ultimo hijo)
+  afterend(hermano siguiente)
+*/
+
+const $cards = document.querySelector(".cards"),
+  $newCard = document.createElement("figure");
+
+let $contenCard = `
+  &lt;img src="https://placeimg.com/200/200/any" alt="Any"&gt;
+  &lt;figcaption&gt;&lt;/figcaption&gt;
+`;
+$newCard.classList.add("card");
+
+$newCard.insertAdjacentHTML("afterbegin", $contenCard);
+$cards.insertAdjacentElement("beforeend", $newCard);
+$newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
+
+//$cards.prepend($newCard);
+//$cards.append($newCard);
+//$cards.before($newCard);
+//$cards.after($newCard);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=tqqw2b1kasg&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h2 id="eventos">Eventos</h2>
+<p>Los eventos son los mecanismos que tenemos en <em>JavaScript</em> para controlar las acciones del usuario y definir el comportamiento del documento en cierto momento o cuando se cumplan ciertas condiciones.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Events" target="_blank" rel="noopener">Más información en <em>MDN</em></a>.</p>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=IQchmLGDXgU&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<h3 id="manejadoresdeeventos">Manejadores de Eventos:</h3>
+<p>Las funciones que se ejecutan en un evento se llaman <em><strong>Event Handler</strong></em> (Manejador de Eventos).</p>
+<pre><code class="js language-js">function holaMundo() {
+  alert("Hola Mundo");
+  console.log(event);
+}
+
+function saludar(nombre = "Desconocid@") {
+  alert(`Hola ${nombre}`);
+  console.log(event);
+}
+
+const $eventoSemantico = document.getElementById("evento-semantico"),
+  $eventoMultiple = document.getElementById("evento-multiple"),
+  $eventoRemover = document.getElementById("evento-remover");
+
+$eventoSemantico.onclick = holaMundo;
+$eventoSemantico.onclick = function (e) {
+  alert("Hola Mundo Manejador de Eventos Semántico");
+  console.log(e);
+  console.log(event);
+};
+
+$eventoMultiple.addEventListener("click", holaMundo);
+$eventoMultiple.addEventListener("click", (e) =&gt; {
+  alert("Hola Mundo Manejador de Eventos Múltiple");
+  console.log(e);
+  console.log(e.type);
+  console.log(e.target);
+  console.log(event);
+});
+$eventoMultiple.addEventListener("click", () =&gt; {
+  saludar();
+  saludar("Jon");
+});
+
+const removerDobleClick = (e) =&gt; {
+  alert(`Removiendo el evento de tipo ${e.type}`);
+  console.log(e);
+  $eventoRemover.removeEventListener("dblclick", removerDobleClick);
+  $eventoRemover.disabled = true;
+};
+
+$eventoRemover.addEventListener("dblclick", removerDobleClick);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=2oHVjLrnRmY&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="flujodeeventosburbujaycaptura">Flujo de Eventos (Burbuja y Captura):</h3>
+<p>El método <code>addEventListener()</code> tiene un tercer párametro que puede ser de tipo <code>boolean</code>, si no se especifica, el valor por defecto es <code>false</code>.</p>
+<p>Si el parámetro es <code>false</code> se ejecuta la fase de burbuja (ir del elemento más interno al más externo).</p>
+<p>Si el parámetro es <code>true</code> se ejecuta la fase de captura (ir del elemento más externo al más interno).</p>
+<pre><code class="js language-js">const $divsEventos = document.querySelectorAll(".eventos-flujo div");
+
+function flujoEventos(e) {
+  console.log(
+    `Hola te saluda ${this.className}, el click lo originó ${e.target.className}`
+  );
+}
+
+console.log($divsEventos);
+
+$divsEventos.forEach((div) =&gt; {
+  //Fase de burbuja
+  //div.addEventListener("click", flujoEventos);
+  //div.addEventListener("click", flujoEventos, false);
+  //Fase de captura
+  //div.addEventListener("click", flujoEventos, true);
+  div.addEventListener("click", flujoEventos, {
+    capture: false,
+    once: true,
+  });
+});
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=myEsMzsJEFg&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="_stoppropagationpreventdefault_"><em>stopPropagation & preventDefault</em>:</h3>
+<pre><code class="js language-js">const $divsEventos = document.querySelectorAll(".eventos-flujo div"),
+  $linkEventos = document.querySelector(".eventos-flujo a");
+
+function flujoEventos(e) {
+  console.log(
+    `Hola te saluda ${this.className}, el click lo originó ${e.target.className}`
+  );
+  e.stopPropagation();
+}
+
+console.log($divsEventos);
+
+$divsEventos.forEach((div) =&gt; {
+  //Fase de burbuja
+  div.addEventListener("click", flujoEventos);
+  //div.addEventListener("click", flujoEventos, false);
+  //Fase de captura
+  //div.addEventListener("click", flujoEventos, true);
+  //div.addEventListener("click", flujoEventos, {
+  //capture: false,
+  //once: true,
+  //});
+});
+
+$linkEventos.addEventListener("click", (e) =&gt; {
+  alert("Hola soy tu amigo y docente digital... Jonathan MirCha");
+  e.preventDefault();
+  e.stopPropagation();
+});
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=2LgnPW_VZYU&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="delegacindeeventos">Delegación de Eventos:</h3>
+<pre><code class="js language-js">function flujoEventos(e) {
+  console.log(
+    `Hola te saluda ${this} el click lo originó ${e.target.className}`
+  );
+  //e.stopPropagation();
+}
+
+document.addEventListener("click", (e) =&gt; {
+  if (e.target.matches(".eventos-flujo div")) {
+    flujoEventos(e);
+  }
+
+  if (e.target.matches(".eventos-flujo a")) {
+    alert("Hola soy tu amigo y docente digital... Jonathan MirCha");
+    e.preventDefault();
+    //e.stopPropagation();
+  }
+});
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=j2fWSgOrxRs&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h2 id="_bombrowserobjectmodel_"><em>BOM: Browser Object Model</em></h2>
+<p>El Modelo de Objetos del Navegador es un <em>API</em> que permite acceder y modificar las propiedades de las ventanas del propio navegador.</p>
+<p>Mediante el <em>BOM</em>, es posible redimensionar y mover la ventana del navegador y realizar muchas otras manipulaciones no relacionadas con el contenido de la página <em>HTML</em>.</p>
+<p>El mayor inconveniente del <em>BOM</em> es que, a diferencia del <em>DOM</em>, no es un <em>API</em> estándar, cada navegador lo puede interpretar de diferente manera, sin embargo, en los últimos años los navegadores están más estandarizados entre sí.</p>
+<h3 id="propiedadesyeventosdel_bom_">Propiedades y Eventos del <em>BOM</em>:</h3>
+<pre><code class="js language-js">window.addEventListener("resize", (e) =&gt; {
+  console.clear();
+  console.log("********** Evento Resize **********");
+  console.log(window.innerWidth);
+  console.log(window.innerHeight);
+  console.log(window.outerWidth);
+  console.log(window.outerHeight);
+  console.log(e);
+});
+
+window.addEventListener("scroll", (e) =&gt; {
+  console.clear();
+  console.log("********** Evento Scroll **********");
+  console.log(window.scrollX);
+  console.log(window.scrollY);
+  console.log(e);
+});
+
+window.addEventListener("load", (e) =&gt; {
+  console.log("********** Evento Load **********");
+  console.log(window.screenX);
+  console.log(window.screenY);
+  console.log(e);
+});
+
+document.addEventListener("DOMContentLoaded", (e) =&gt; {
+  console.log("********** Evento DOMContentLoaded **********");
+  console.log(window.screenX);
+  console.log(window.screenY);
+  console.log(e);
+});
+</code></pre>
+<p>El evento <code>DOMContentLoaded</code> es disparado cuando el documento <em>HTML</em> ha sido completamente cargado y parseado, sin esperar hojas de estilo, imágenes y subtramas para finalizar la carga.</p>
+<p>El evento <code>load</code> se dispara cuando se ha detectado la carga completa de la página.</p>
+<p>Es un error frecuente usar <code>load</code> cuando <code>DOMContentLoaded</code> es mucho más apropiado.</p>
+<p>Peticiones asíncronas pausan el parseo del <em>DOM</em>.</p>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=BoDLn_r0o84&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="mtodosdel_bom_">Métodos del <em>BOM</em>:</h3>
+<pre><code class="js language-js">window.alert("Alerta");
+window.confirm("Confirmación");
+window.prompt("Aviso");
+
+const $btnAbrir = document.getElementById("abrir-ventana"),
+  $btnCerrar = document.getElementById("cerrar-ventana"),
+  $btnImprimir = document.getElementById("imprimir-ventana");
+
+let ventana;
+
+$btnAbrir.addEventListener(
+  "click",
+  (e) =&gt; (ventana = window.open("https://jonmircha.com"))
+);
+
+$btnCerrar.addEventListener("click", (e) =&gt; {
+  //window.close();
+  ventana.close();
+});
+
+$btnImprimir.addEventListener("click", (e) =&gt; window.print());
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=EqLVoofiXVs&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p>
+<h3 id="objetos_url_historialynavegador">Objetos: <em>URL</em>, Historial y Navegador:</h3>
+<pre><code class="js language-js">console.log("********** Objeto URL (location) **********");
+console.log(location);
+console.log(location.origin);
+console.log(location.protocol);
+console.log(location.host);
+console.log(location.hostname);
+console.log(location.port);
+console.log(location.href);
+console.log(location.hash);
+console.log(location.search);
+console.log(location.pathname);
+//location.reload();
+
+console.log("********** Objeto Historial (history) **********");
+console.log(history);
+console.log(history.length);
+//history.forward(1);
+//history.go(-3);
+//history.back(2);
+
+console.log("********** Objeto Navegador (navigator) **********");
+console.log(navigator);
+console.log(navigator.connection);
+console.log(navigator.geolocation);
+console.log(navigator.mediaDevices);
+console.log(navigator.mimeTypes);
+console.log(navigator.onLine);
+console.log(navigator.serviceWorker);
+console.log(navigator.storage);
+console.log(navigator.usb);
+console.log(navigator.userAgent);
+</code></pre>
+<p><a class="btn-pulse" href="https://www.youtube.com/watch?v=P5VxI53U_WI&list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA" target="_blank" rel="noopener">Ver Video</a></p>
+<p><br><hr><br></p></div><aside class="fluid-wrap text-center"><p class="fluid-2">Si te sirvió mi contenido, compártelo 🤗.</p><div class="addthis_inline_share_toolbox_6qma"></div></aside><section class="fluid-insulate"><article class="dark-box"><h3 class="super-title">📭 La lista de MirCha</h3><p class="fluid-2">Una vez al mes envío el contenido que escribo, grabo o produzco, esperando pueda aportar valor personal o profesional.</p><p class="fluid-2">Puedes darte de baja en cualquier momento, sin hacer preguntas.</p><p class="fluid-2"><b>¿Te animas?</b></p><a class="btn-pulse btn-float-right" href="https://tinyletter.com/jonmircha" target="_blank" rel="noopener">SÍ, me suscribo</a></article></section><div id="disqus_thread" class="fluid-wrap"></div><noscript>Por favor habilita JavaScript para ver los<!-- --> <a href="https://disqus.com/?ref_noscript">comentarios gestionados por Disqus.</a></noscript><article class="jsx-3439268700 full-screen-center sponsors"><div class="jsx-3439268700 fluid-insulate"><aside class="jsx-3439268700 fluid-wrap text-center"><h3 class="jsx-3439268700">Si te gusta y te sirve mi contenido</h3><h2 class="jsx-3439268700 fluid-5 super-title"><i class="jsx-3439268700">¡Apóyame!</i></h2><p class="jsx-3439268700 fluid-2">Paso la mayor parte de mi tiempo haciendo cursos y tutoriales<!-- --> <b class="jsx-3439268700">gratuitos</b> sobre diseño y desarrollo <i class="jsx-3439268700">web</i> en<!-- --> <a href="https://youtube.com/jonmircha?sub_confirmation=1" target="_blank" rel="noopener" class="jsx-3439268700"><i class="jsx-3439268700">YouTube</i></a>.</p><p class="jsx-3439268700 fluid-2">Únete a mi <i class="jsx-3439268700">Patreon</i> o a mi <i class="jsx-3439268700">Membresía de YouTube</i>, tengo diferentes <b class="jsx-3439268700">beneficios</b> para los que me quieran apoyar.</p><p class="jsx-3439268700 fluid-2">También puedes invitarme un taco 🌮 por <i class="jsx-3439268700">Paypal</i>.</p><h3 class="jsx-3439268700">🤗¡Muchas Gracias!🤗</h3></aside><aside class="jsx-3439268700 fluid-wrap-1200 flex-grid-center"><a href="https://www.patreon.com/jonmircha" style="color:#f96854" target="_blank" rel="noopener" class="jsx-3439268700 box-shadow-none sponsor"><img src="/img/sponsors/patreon.svg" alt="Patreon" loading="lazy" class="jsx-3439268700"/><h3 class="jsx-3439268700">Patreon</h3></a><a href="https://www.paypal.me/jonmircha" style="color:#00457c" target="_blank" rel="noopener" class="jsx-3439268700 box-shadow-none sponsor"><img src="/img/sponsors/paypal.svg" alt="PayPal" loading="lazy" class="jsx-3439268700"/><h3 class="jsx-3439268700">PayPal</h3></a><a href="https://www.youtube.com/jonmircha/join" style="color:#f00" target="_blank" rel="noopener" class="jsx-3439268700 box-shadow-none sponsor"><img src="/img/sponsors/youtube.svg" alt="YouTube" loading="lazy" class="jsx-3439268700"/><h3 class="jsx-3439268700">YouTube</h3></a></aside></div></article></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"content":"\u003ch1 id=\"_dom_\"\u003e\u003cem\u003eDOM\u003c/em\u003e\u003c/h1\u003e\n\u003cp\u003e\u003csmall class=\"date\"\u003eÚltima actualización: \u003cem\u003eMay 27 2020\u003c/em\u003e\u003c/small\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg class=\"icon-x5\" src=\"/img/category/javascript.svg\" alt=\"Categoría: javascript\" title=\"Categoría: javascript\" loading=\"lazy\"\u003e\u003c/p\u003e\n\u003ch2 id=\"_domdocumentobjectmodel_\"\u003e\u003cem\u003eDOM: Document Object Model\u003c/em\u003e\u003c/h2\u003e\n\u003cp\u003eEl Modelo de Objetos del Documento es un \u003cem\u003eAPI\u003c/em\u003e para documentos \u003cem\u003eHTML\u003c/em\u003e y \u003cem\u003eXML\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003eÉste proveé una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código \u003cem\u003eJavaScript\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eEl \u003cem\u003eDOM\u003c/em\u003e no es parte de la especificación de \u003cem\u003eJavaScript\u003c/em\u003e, es una \u003cem\u003eAPI\u003c/em\u003e para los navegadores.\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://developer.mozilla.org/es/docs/DOM\" target=\"_blank\" rel=\"noopener\"\u003eMás información en \u003cem\u003eMDN\u003c/em\u003e\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=VlMiHqTR-7s\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"elementosdeldocumento\"\u003eElementos del Documento:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econsole.log(window.document);\nconsole.log(document);\nconsole.log(document.head);\nconsole.log(document.body);\nconsole.log(document.documentElement);\nconsole.log(document.doctype);\nconsole.log(document.charset);\nconsole.log(document.title);\nconsole.log(document.links);\nconsole.log(document.images);\nconsole.log(document.forms);\nconsole.log(document.styleSheets);\nconsole.log(document.scripts);\nsetTimeout(() =\u0026gt; {\n  console.log(document.getSelection().toString());\n}, 2000);\ndocument.write(\"\u0026lt;h2\u0026gt;Hola Mundo desde el DOM\u0026lt;/h2\u0026gt;\");\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=dF7lp_qBfV0\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"nodoselementosyselectores\"\u003eNodos, Elementos y Selectores:\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType\" target=\"_blank\" rel=\"noopener\"\u003eMás información en \u003cem\u003eMDN\u003c/em\u003e\u003c/a\u003e.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econsole.log(document.getElementsByTagName(\"li\"));\nconsole.log(document.getElementsByClassName(\"card\"));\nconsole.log(document.getElementsByName(\"nombre\"));\nconsole.log(document.getElementById(\"menu\"));\nconsole.log(document.querySelector(\"#menu\"));\nconsole.log(document.querySelector(\"a\"));\nconsole.log(document.querySelectorAll(\"a\"));\nconsole.log(document.querySelectorAll(\"a\").length);\ndocument.querySelectorAll(\"a\").forEach((el) =\u0026gt; console.log(el));\nconsole.log(document.querySelector(\".card\"));\nconsole.log(document.querySelectorAll(\".card\"));\nconsole.log(document.querySelectorAll(\".card\")[2]);\nconsole.log(document.querySelector(\"#menu li\"));\nconsole.log(document.querySelectorAll(\"#menu li\"));\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=zBmtmlB5b5g\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"atributosy_dataattributes_\"\u003eAtributos y \u003cem\u003eData-Attributes\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econsole.log(document.documentElement.lang);\nconsole.log(document.documentElement.getAttribute(\"lang\"));\nconsole.log(document.querySelector(\".link-dom\").href);\nconsole.log(document.querySelector(\".link-dom\").getAttribute(\"href\"));\n\ndocument.documentElement.lang = \"en\";\nconsole.log(document.documentElement.lang);\ndocument.documentElement.setAttribute(\"lang\", \"es-MX\");\nconsole.log(document.documentElement.lang);\n\nconst $linkDOM = document.querySelector(\".link-dom\");\n\n$linkDOM.setAttribute(\"target\", \"_blank\");\n$linkDOM.setAttribute(\"rel\", \"noopener\");\n$linkDOM.setAttribute(\"href\", \"https://youtube.com/jonmircha\");\nconsole.log($linkDOM.hasAttribute(\"rel\"));\n$linkDOM.removeAttribute(\"rel\");\nconsole.log($linkDOM.hasAttribute(\"rel\"));\n\n//Data-Attributes\nconsole.log($linkDOM.getAttribute(\"data-description\"));\nconsole.log($linkDOM.dataset);\nconsole.log($linkDOM.dataset.description);\n$linkDOM.setAttribute(\"data-description\", \"Modelo de Objeto del Documento\");\nconsole.log($linkDOM.dataset.description);\n$linkDOM.dataset.description = \"Suscríbete a mi canal y comparte\";\nconsole.log($linkDOM.dataset.description);\nconsole.log($linkDOM.hasAttribute(\"data-id\"));\n$linkDOM.removeAttribute(\"data-id\");\nconsole.log($linkDOM.hasAttribute(\"data-id\"));\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=l6npGZa_vgc\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"estilosyvariables_css_\"\u003eEstilos y Variables \u003cem\u003eCSS\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $linkDOM = document.querySelector(\".link-dom\");\n\nconsole.log($linkDOM.style);\nconsole.log($linkDOM.getAttribute(\"style\"));\nconsole.log($linkDOM.style.backgroundColor);\nconsole.log($linkDOM.style.color);\nconsole.log(window.getComputedStyle($linkDOM));\nconsole.log(getComputedStyle($linkDOM).getPropertyValue(\"color\"));\n\n$linkDOM.style.setProperty(\"text-decoration\", \"none\");\n$linkDOM.style.setProperty(\"display\", \"block\");\n$linkDOM.style.width = \"50%\";\n$linkDOM.style.textAlign = \"center\";\n$linkDOM.style.marginLeft = \"auto\";\n$linkDOM.style.marginRight = \"auto\";\n$linkDOM.style.padding = \"1rem\";\n$linkDOM.style.borderRadius = \".5rem\";\n\nconsole.log($linkDOM.style);\nconsole.log($linkDOM.getAttribute(\"style\"));\nconsole.log(getComputedStyle($linkDOM));\n\n//Variables CSS - Custom Properties CSS\nconst $html = document.documentElement,\n  $body = document.body;\n\nlet varDarkColor = getComputedStyle($html).getPropertyValue(\"--dark-color\"),\n  varYellowColor = getComputedStyle($html).getPropertyValue(\"--yellow-color\");\n\nconsole.log(varDarkColor, varYellowColor);\n\n$body.style.backgroundColor = varDarkColor;\n$body.style.color = varYellowColor;\n\n$html.style.setProperty(\"--dark-color\", \"#000\");\nvarDarkColor = getComputedStyle($html).getPropertyValue(\"--dark-color\");\n\n$body.style.setProperty(\"background-color\", varDarkColor);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=asR6_XGzI3s\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"clases_css_\"\u003eClases \u003cem\u003eCSS\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $card = document.querySelector(\".card\");\n\nconsole.log($card);\nconsole.log($card.className);\nconsole.log($card.classList);\nconsole.log($card.classList.contains(\"rotate-45\"));\n$card.classList.add(\"rotate-45\");\nconsole.log($card.classList.contains(\"rotate-45\"));\nconsole.log($card.className);\nconsole.log($card.classList);\n$card.classList.remove(\"rotate-45\");\nconsole.log($card.classList.contains(\"rotate-45\"));\n$card.classList.toggle(\"rotate-45\");\nconsole.log($card.classList.contains(\"rotate-45\"));\n$card.classList.toggle(\"rotate-45\");\nconsole.log($card.classList.contains(\"rotate-45\"));\n$card.classList.toggle(\"rotate-45\");\n$card.classList.replace(\"rotate-45\", \"rotate-135\");\n$card.classList.add(\"opacity-80\", \"sepia\");\n$card.classList.remove(\"opacity-80\", \"sepia\");\n$card.classList.toggle(\"opacity-80\", \"sepia\");\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=x1bzRMEH89A\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"textoy_html_\"\u003eTexto y \u003cem\u003eHTML\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $whatIsDOM = document.getElementById(\"que-es\");\nlet text = `\n    \u0026lt;p\u0026gt;\n      El Modelo de Objetos del Documento (\u0026lt;b\u0026gt;\u0026lt;i\u0026gt;DOM - Document Object Model\u0026lt;/i\u0026gt;\u0026lt;/b\u0026gt;) es un API para documentos HTML y XML.\n    \u0026lt;/p\u0026gt;\n    \u0026lt;p\u0026gt;\n      Éste proveé una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS.\n    \u0026lt;/p\u0026gt;\n    \u0026lt;p\u0026gt;\n      \u0026lt;mark\u0026gt;El DOM no es parte de la especificación de JavaScript, es una API para los navegadores.\u0026lt;/mark\u0026gt;\n    \u0026lt;/p\u0026gt;\n  `;\n\n//$whatIsDOM.innerText = text;\n$whatIsDOM.textContent = text;\n$whatIsDOM.innerHTML = text;\n$whatIsDOM.outerHTML = text;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=ezjxA4o2-Ck\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"_domtraversing_recorriendoel_dom_\"\u003e\u003cem\u003eDOM Traversing\u003c/em\u003e: Recorriendo el \u003cem\u003eDOM\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $cards = document.querySelector(\".cards\");\n\nconsole.log($cards);\nconsole.log($cards.children);\nconsole.log($cards.children[2]);\nconsole.log($cards.parentElement);\nconsole.log($cards.firstElementChild);\nconsole.log($cards.lastElementChild);\nconsole.log($cards.previousElementSibling);\nconsole.log($cards.nextElementSibling);\nconsole.log($cards.closest(\"div\"));\nconsole.log($cards.closest(\"body\"));\nconsole.log($cards.children[3].closest(\"section\"));\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=m50UZkgV9-Q\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"creandoelementosyfragmentos\"\u003eCreando Elementos y Fragmentos:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $figure = document.createElement(\"figure\"),\n  $img = document.createElement(\"img\"),\n  $figcaption = document.createElement(\"figcaption\"),\n  $figcaptionText = document.createTextNode(\"Animals\"),\n  $cards = document.querySelector(\".cards\"),\n  $figure2 = document.createElement(\"figure\");\n\n$img.setAttribute(\"src\", \"https://placeimg.com/200/200/animals\");\n$img.setAttribute(\"alt\", \"Animals\");\n$figure.classList.add(\"card\");\n\n$figcaption.appendChild($figcaptionText);\n$figure.appendChild($img);\n$figure.appendChild($figcaption);\n$cards.appendChild($figure);\n\n$figure2.innerHTML = `\n\u0026lt;img src=\"https://placeimg.com/200/200/people\" alt=\"People\"\u0026gt;\n\u0026lt;figcaption\u0026gt;People\u0026lt;/figcaption\u0026gt;\n`;\n$figure2.classList.add(\"card\");\n\n$cards.appendChild($figure2);\n\nconst estaciones = [\"Primavera\", \"Verano\", \"Otoño\", \"Invierno\"],\n  $ul = document.createElement(\"ul\");\n\ndocument.write(\"\u0026lt;h3\u0026gt;Estaciones del Año\u0026lt;/h3\u0026gt;\");\ndocument.body.appendChild($ul);\n\nestaciones.forEach((el) =\u0026gt; {\n  const $li = document.createElement(\"li\");\n  $li.textContent = el;\n  $ul.appendChild($li);\n});\n\nconst continentes = [\"África\", \"América\", \"Asia\", \"Europa\", \"Oceanía\"],\n  $ul2 = document.createElement(\"ul\");\n\ndocument.write(\"\u0026lt;h3\u0026gt;Continentes del Mundo\u0026lt;/h3\u0026gt;\");\ndocument.body.appendChild($ul2);\n$ul2.innerHTML = \"\";\ncontinentes.forEach((el) =\u0026gt; ($ul2.innerHTML += `\u0026lt;li\u0026gt;${el}\u0026lt;/li\u0026gt;`));\n\nconst meses = [\n    \"Enero\",\n    \"Febrero\",\n    \"Marzo\",\n    \"Abril\",\n    \"Mayo\",\n    \"Junio\",\n    \"Julio\",\n    \"Agosto\",\n    \"Septiembre\",\n    \"Octubre\",\n    \"Noviembre\",\n    \"Diciembre\",\n  ],\n  $ul3 = document.createElement(\"ul\"),\n  $fragment = document.createDocumentFragment();\n\nmeses.forEach((el) =\u0026gt; {\n  const $li = document.createElement(\"li\");\n  $li.textContent = el;\n  $fragment.appendChild($li);\n});\n\ndocument.write(\"\u0026lt;h3\u0026gt;Meses del Año\u0026lt;/h3\u0026gt;\");\n$ul3.appendChild($fragment);\ndocument.body.appendChild($ul3);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=tFSFX37Yah4\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"_templateshtml_\"\u003e\u003cem\u003eTemplates HTML\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"html language-html\"\u003e\u0026lt;template id=\"template-card\"\u0026gt;\n  \u0026lt;figure class=\"card\"\u0026gt;\n    \u0026lt;img /\u0026gt;\n    \u0026lt;figcaption\u0026gt;\u0026lt;/figcaption\u0026gt;\n  \u0026lt;/figure\u0026gt;\n\u0026lt;/template\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $cards = document.querySelector(\".cards\"),\n  $template = document.getElementById(\"template-card\").content,\n  $fragment = document.createDocumentFragment(),\n  cardsContent = [\n    {\n      title: \"Tecnología\",\n      img: \"https://placeimg.com/200/200/tech\",\n    },\n    {\n      title: \"Animales\",\n      img: \"https://placeimg.com/200/200/animals\",\n    },\n    {\n      title: \"Arquitectura\",\n      img: \"https://placeimg.com/200/200/arch\",\n    },\n    {\n      title: \"Gente\",\n      img: \"https://placeimg.com/200/200/people\",\n    },\n    {\n      title: \"Naturaleza\",\n      img: \"https://placeimg.com/200/200/nature\",\n    },\n  ];\n\ncardsContent.forEach((el) =\u0026gt; {\n  $template.querySelector(\"img\").setAttribute(\"src\", el.img);\n  $template.querySelector(\"img\").setAttribute(\"alt\", el.title);\n  $template.querySelector(\"figcaption\").textContent = el.title;\n\n  let $clone = document.importNode($template, true);\n  $fragment.appendChild($clone);\n});\n\n$cards.appendChild($fragment);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=Q9y9BugN8-s\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"modificandoelementos_oldstyle_\"\u003eModificando Elementos (\u003cem\u003eOld Style\u003c/em\u003e):\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $cards = document.querySelector(\".cards\"),\n  $newCard = document.createElement(\"figure\"),\n  $cloneCards = $cards.cloneNode(true);\n\n$newCard.innerHTML = `\n  \u0026lt;img src=\"https://placeimg.com/200/200/any\" alt=\"Any\"\u0026gt;\n  \u0026lt;figcaption\u0026gt;Any\u0026lt;/figcaption\u0026gt;\n`;\n$newCard.classList.add(\"card\");\n\n//$cards.replaceChild($newCard, $cards.children[2]);\n//$cards.removeChild($cards.lastElementChild);\n$cards.insertBefore($newCard, $cards.firstElementChild);\ndocument.body.appendChild($cloneCards);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=epMoFp_2ay8\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"modificandoelementos_coolstyle_\"\u003eModificando Elementos (\u003cem\u003eCool Style\u003c/em\u003e):\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003e/*\n.insertAdjacent...\n  .insertAdjacentElement(position, el)\n  .insertAdjacentHTML(position, html)\n  .insertAdjacentText(position, text)\n\nPosiciones:\n  beforebegin(hermano anterior)\n  afterbegin(primer hijo)\n  beforeend(ultimo hijo)\n  afterend(hermano siguiente)\n*/\n\nconst $cards = document.querySelector(\".cards\"),\n  $newCard = document.createElement(\"figure\");\n\nlet $contenCard = `\n  \u0026lt;img src=\"https://placeimg.com/200/200/any\" alt=\"Any\"\u0026gt;\n  \u0026lt;figcaption\u0026gt;\u0026lt;/figcaption\u0026gt;\n`;\n$newCard.classList.add(\"card\");\n\n$newCard.insertAdjacentHTML(\"afterbegin\", $contenCard);\n$cards.insertAdjacentElement(\"beforeend\", $newCard);\n$newCard.querySelector(\"figcaption\").insertAdjacentText(\"afterbegin\", \"Any\"); */\n\n//$cards.prepend($newCard);\n//$cards.append($newCard);\n//$cards.before($newCard);\n//$cards.after($newCard);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=tqqw2b1kasg\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch2 id=\"eventos\"\u003eEventos\u003c/h2\u003e\n\u003cp\u003eLos eventos son los mecanismos que tenemos en \u003cem\u003eJavaScript\u003c/em\u003e para controlar las acciones del usuario y definir el comportamiento del documento en cierto momento o cuando se cumplan ciertas condiciones.\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://developer.mozilla.org/en-US/docs/Web/Events\" target=\"_blank\" rel=\"noopener\"\u003eMás información en \u003cem\u003eMDN\u003c/em\u003e\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=IQchmLGDXgU\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"manejadoresdeeventos\"\u003eManejadores de Eventos:\u003c/h3\u003e\n\u003cp\u003eLas funciones que se ejecutan en un evento se llaman \u003cem\u003e\u003cstrong\u003eEvent Handler\u003c/strong\u003e\u003c/em\u003e (Manejador de Eventos).\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003efunction holaMundo() {\n  alert(\"Hola Mundo\");\n  console.log(event);\n}\n\nfunction saludar(nombre = \"Desconocid@\") {\n  alert(`Hola ${nombre}`);\n  console.log(event);\n}\n\nconst $eventoSemantico = document.getElementById(\"evento-semantico\"),\n  $eventoMultiple = document.getElementById(\"evento-multiple\"),\n  $eventoRemover = document.getElementById(\"evento-remover\");\n\n$eventoSemantico.onclick = holaMundo;\n$eventoSemantico.onclick = function (e) {\n  alert(\"Hola Mundo Manejador de Eventos Semántico\");\n  console.log(e);\n  console.log(event);\n};\n\n$eventoMultiple.addEventListener(\"click\", holaMundo);\n$eventoMultiple.addEventListener(\"click\", (e) =\u0026gt; {\n  alert(\"Hola Mundo Manejador de Eventos Múltiple\");\n  console.log(e);\n  console.log(e.type);\n  console.log(e.target);\n  console.log(event);\n});\n$eventoMultiple.addEventListener(\"click\", () =\u0026gt; {\n  saludar();\n  saludar(\"Jon\");\n});\n\nconst removerDobleClick = (e) =\u0026gt; {\n  alert(`Removiendo el evento de tipo ${e.type}`);\n  console.log(e);\n  $eventoRemover.removeEventListener(\"dblclick\", removerDobleClick);\n  $eventoRemover.disabled = true;\n};\n\n$eventoRemover.addEventListener(\"dblclick\", removerDobleClick);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=2oHVjLrnRmY\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"flujodeeventosburbujaycaptura\"\u003eFlujo de Eventos (Burbuja y Captura):\u003c/h3\u003e\n\u003cp\u003eEl método \u003ccode\u003eaddEventListener()\u003c/code\u003e tiene un tercer párametro que puede ser de tipo \u003ccode\u003eboolean\u003c/code\u003e, si no se especifica, el valor por defecto es \u003ccode\u003efalse\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eSi el parámetro es \u003ccode\u003efalse\u003c/code\u003e se ejecuta la fase de burbuja (ir del elemento más interno al más externo).\u003c/p\u003e\n\u003cp\u003eSi el parámetro es \u003ccode\u003etrue\u003c/code\u003e se ejecuta la fase de captura (ir del elemento más externo al más interno).\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $divsEventos = document.querySelectorAll(\".eventos-flujo div\");\n\nfunction flujoEventos(e) {\n  console.log(\n    `Hola te saluda ${this.className}, el click lo originó ${e.target.className}`\n  );\n}\n\nconsole.log($divsEventos);\n\n$divsEventos.forEach((div) =\u0026gt; {\n  //Fase de burbuja\n  //div.addEventListener(\"click\", flujoEventos);\n  //div.addEventListener(\"click\", flujoEventos, false);\n  //Fase de captura\n  //div.addEventListener(\"click\", flujoEventos, true);\n  div.addEventListener(\"click\", flujoEventos, {\n    capture: false,\n    once: true,\n  });\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=myEsMzsJEFg\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"_stoppropagationpreventdefault_\"\u003e\u003cem\u003estopPropagation \u0026 preventDefault\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econst $divsEventos = document.querySelectorAll(\".eventos-flujo div\"),\n  $linkEventos = document.querySelector(\".eventos-flujo a\");\n\nfunction flujoEventos(e) {\n  console.log(\n    `Hola te saluda ${this.className}, el click lo originó ${e.target.className}`\n  );\n  e.stopPropagation();\n}\n\nconsole.log($divsEventos);\n\n$divsEventos.forEach((div) =\u0026gt; {\n  //Fase de burbuja\n  div.addEventListener(\"click\", flujoEventos);\n  //div.addEventListener(\"click\", flujoEventos, false);\n  //Fase de captura\n  //div.addEventListener(\"click\", flujoEventos, true);\n  //div.addEventListener(\"click\", flujoEventos, {\n  //capture: false,\n  //once: true,\n  //});\n});\n\n$linkEventos.addEventListener(\"click\", (e) =\u0026gt; {\n  alert(\"Hola soy tu amigo y docente digital... Jonathan MirCha\");\n  e.preventDefault();\n  e.stopPropagation();\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=2LgnPW_VZYU\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"delegacindeeventos\"\u003eDelegación de Eventos:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003efunction flujoEventos(e) {\n  console.log(\n    `Hola te saluda ${this} el click lo originó ${e.target.className}`\n  );\n  //e.stopPropagation();\n}\n\ndocument.addEventListener(\"click\", (e) =\u0026gt; {\n  if (e.target.matches(\".eventos-flujo div\")) {\n    flujoEventos(e);\n  }\n\n  if (e.target.matches(\".eventos-flujo a\")) {\n    alert(\"Hola soy tu amigo y docente digital... Jonathan MirCha\");\n    e.preventDefault();\n    //e.stopPropagation();\n  }\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=j2fWSgOrxRs\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch2 id=\"_bombrowserobjectmodel_\"\u003e\u003cem\u003eBOM: Browser Object Model\u003c/em\u003e\u003c/h2\u003e\n\u003cp\u003eEl Modelo de Objetos del Navegador es un \u003cem\u003eAPI\u003c/em\u003e que permite acceder y modificar las propiedades de las ventanas del propio navegador.\u003c/p\u003e\n\u003cp\u003eMediante el \u003cem\u003eBOM\u003c/em\u003e, es posible redimensionar y mover la ventana del navegador y realizar muchas otras manipulaciones no relacionadas con el contenido de la página \u003cem\u003eHTML\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003eEl mayor inconveniente del \u003cem\u003eBOM\u003c/em\u003e es que, a diferencia del \u003cem\u003eDOM\u003c/em\u003e, no es un \u003cem\u003eAPI\u003c/em\u003e estándar, cada navegador lo puede interpretar de diferente manera, sin embargo, en los últimos años los navegadores están más estandarizados entre sí.\u003c/p\u003e\n\u003ch3 id=\"propiedadesyeventosdel_bom_\"\u003ePropiedades y Eventos del \u003cem\u003eBOM\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003ewindow.addEventListener(\"resize\", (e) =\u0026gt; {\n  console.clear();\n  console.log(\"********** Evento Resize **********\");\n  console.log(window.innerWidth);\n  console.log(window.innerHeight);\n  console.log(window.outerWidth);\n  console.log(window.outerHeight);\n  console.log(e);\n});\n\nwindow.addEventListener(\"scroll\", (e) =\u0026gt; {\n  console.clear();\n  console.log(\"********** Evento Scroll **********\");\n  console.log(window.scrollX);\n  console.log(window.scrollY);\n  console.log(e);\n});\n\nwindow.addEventListener(\"load\", (e) =\u0026gt; {\n  console.log(\"********** Evento Load **********\");\n  console.log(window.screenX);\n  console.log(window.screenY);\n  console.log(e);\n});\n\ndocument.addEventListener(\"DOMContentLoaded\", (e) =\u0026gt; {\n  console.log(\"********** Evento DOMContentLoaded **********\");\n  console.log(window.screenX);\n  console.log(window.screenY);\n  console.log(e);\n});\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eEl evento \u003ccode\u003eDOMContentLoaded\u003c/code\u003e es disparado cuando el documento \u003cem\u003eHTML\u003c/em\u003e ha sido completamente cargado y parseado, sin esperar hojas de estilo, imágenes y subtramas para finalizar la carga.\u003c/p\u003e\n\u003cp\u003eEl evento \u003ccode\u003eload\u003c/code\u003e se dispara cuando se ha detectado la carga completa de la página.\u003c/p\u003e\n\u003cp\u003eEs un error frecuente usar \u003ccode\u003eload\u003c/code\u003e cuando \u003ccode\u003eDOMContentLoaded\u003c/code\u003e es mucho más apropiado.\u003c/p\u003e\n\u003cp\u003ePeticiones asíncronas pausan el parseo del \u003cem\u003eDOM\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=BoDLn_r0o84\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"mtodosdel_bom_\"\u003eMétodos del \u003cem\u003eBOM\u003c/em\u003e:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003ewindow.alert(\"Alerta\");\nwindow.confirm(\"Confirmación\");\nwindow.prompt(\"Aviso\");\n\nconst $btnAbrir = document.getElementById(\"abrir-ventana\"),\n  $btnCerrar = document.getElementById(\"cerrar-ventana\"),\n  $btnImprimir = document.getElementById(\"imprimir-ventana\");\n\nlet ventana;\n\n$btnAbrir.addEventListener(\n  \"click\",\n  (e) =\u0026gt; (ventana = window.open(\"https://jonmircha.com\"))\n);\n\n$btnCerrar.addEventListener(\"click\", (e) =\u0026gt; {\n  //window.close();\n  ventana.close();\n});\n\n$btnImprimir.addEventListener(\"click\", (e) =\u0026gt; window.print());\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=EqLVoofiXVs\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003ch3 id=\"objetos_url_historialynavegador\"\u003eObjetos: \u003cem\u003eURL\u003c/em\u003e, Historial y Navegador:\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"js language-js\"\u003econsole.log(\"********** Objeto URL (location) **********\");\nconsole.log(location);\nconsole.log(location.origin);\nconsole.log(location.protocol);\nconsole.log(location.host);\nconsole.log(location.hostname);\nconsole.log(location.port);\nconsole.log(location.href);\nconsole.log(location.hash);\nconsole.log(location.search);\nconsole.log(location.pathname);\n//location.reload();\n\nconsole.log(\"********** Objeto Historial (history) **********\");\nconsole.log(history);\nconsole.log(history.length);\n//history.forward(1);\n//history.go(-3);\n//history.back(2);\n\nconsole.log(\"********** Objeto Navegador (navigator) **********\");\nconsole.log(navigator);\nconsole.log(navigator.connection);\nconsole.log(navigator.geolocation);\nconsole.log(navigator.mediaDevices);\nconsole.log(navigator.mimeTypes);\nconsole.log(navigator.onLine);\nconsole.log(navigator.serviceWorker);\nconsole.log(navigator.storage);\nconsole.log(navigator.usb);\nconsole.log(navigator.userAgent);\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ca class=\"btn-pulse\" href=\"https://www.youtube.com/watch?v=P5VxI53U_WI\u0026list=PLvq-jIkSeTUZ6QgYYO3MwG9EMqC-KoLXA\" target=\"_blank\" rel=\"noopener\"\u003eVer Video\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003chr\u003e\u003cbr\u003e\u003c/p\u003e","meta":{"title":"DOM","description":"En esta nota te comparto algunos conceptos importantes sobre el DOM de JavaScript","slug":"dom","category":"javascript","date":"2020-05-27T19:19:19","poster":"/img/blog/dom.png"}}},"page":"/post","query":{"slug":"dom"},"buildId":"1rQpbZWL5yLOmptAMkOoS","nextExport":true,"isFallback":false}</script><script nomodule="" src="/_next/static/runtime/polyfills-b99df05233331b7e84b8.js"></script><script async="" data-next-page="/post" src="/_next/static/1rQpbZWL5yLOmptAMkOoS/pages/post.js"></script><script async="" data-next-page="/_app" src="/_next/static/1rQpbZWL5yLOmptAMkOoS/pages/_app.js"></script><script src="/_next/static/runtime/webpack-b65cab0b00afd201cbda.js" async=""></script><script src="/_next/static/chunks/framework.98c1b221acb34aa9927b.js" async=""></script><script src="/_next/static/chunks/commons.3c217cbb8a5193935007.js" async=""></script><script src="/_next/static/runtime/main-8f4204d4e82e433d8255.js" async=""></script><script src="/_next/static/chunks/7c6cbea9084bdf181f0ad50c9ef43df628d3f365.b08e20f3d97de96a6967.js" async=""></script><script src="/_next/static/1rQpbZWL5yLOmptAMkOoS/_buildManifest.js" async=""></script><script src="/_next/static/1rQpbZWL5yLOmptAMkOoS/_ssgManifest.js" async=""></script></body></html>
